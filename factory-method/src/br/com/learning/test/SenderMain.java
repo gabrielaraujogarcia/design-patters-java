@@ -8,17 +8,19 @@ public class SenderMain {
 	public static void main(String[] args) {
 		
 		SenderFactory factory = new SenderFactory();
-		
-		ISender sender = factory.create(SenderFactory.SMS);
-		sender.send("Padrão Factory Method: envio SMS");
-		
-		sender = factory.create(SenderFactory.EMAIL);
-		sender.send("Padrão Factory Method: envio EMAIL");
-		
-		sender = factory.create(SenderFactory.JMS);
-		sender.send("Padrão Factory Method: envio JMS");
+		toSend(factory.create(SenderFactory.SMS), "Padrão Factory Method: envio SMS");
+		toSend(factory.create(SenderFactory.EMAIL), "Padrão Factory Method: envio EMAIL");
+		toSend(factory.create(SenderFactory.JMS), "Padrão Factory Method: envio JMS");
 		
 	}
 	
-	
+	/**
+	 * A implementação de ISender pode ser alterada em qualquer momento sem que tenha que alterar este método, 
+	 * diminuindo o acoplamento.
+	 * @param sender
+	 * @param msg
+	 */
+	private static void toSend(ISender sender, String msg) {
+		sender.send(msg);
+	}
 }
